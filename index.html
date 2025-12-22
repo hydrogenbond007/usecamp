@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Fucking Build on Camp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #004d5c;
+            --fg: #ffffff;
+            --accent: #FF6D01;
+            --accent2: #FF8225;
+            --teal: #007D9C;
+            --teal-light: #00a3cc;
+            --muted: #b8e0eb;
+            --code-bg: #003d4a;
+            --border: #006d84;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            position: relative;
+        }
+
+        h1 a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        h1 a:hover::after {
+            transform: scaleX(1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem;
+            color: var(--accent2);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--muted);
+            font-weight: 400;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            font-size: 1.1rem;
+        }
+
+        td strong {
+            color: var(--accent);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .feature-list strong {
+            color: var(--fg);
+        }
+
+        p {
+            margin: 1rem 0;
+            color: var(--muted);
+        }
+
+        .tech-block {
+            background: var(--code-bg);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-block strong {
+            color: var(--accent2);
+        }
+
+        .tech-block a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        .tech-block a:hover {
+            border-bottom-style: solid;
+        }
+
+        .faq-item {
+            margin: 1.5rem 0;
+        }
+
+        .faq-item strong {
+            color: var(--fg);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .network-table {
+            background: var(--code-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .network-table th {
+            background: #003340;
+        }
+
+        .network-table td code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #002a33;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .cta-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .cta-list li {
+            margin: 1rem 0;
+        }
+
+        .cta-list a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s ease;
+        }
+
+        .cta-list a:hover {
+            gap: 1rem;
+        }
+
+        .cta-list a::after {
+            content: '→';
+        }
+
+        .cta-list span {
+            color: var(--muted);
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: var(--fg);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 109, 1, 0.2), rgba(255, 130, 37, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p {
+            color: var(--fg);
+            margin: 0;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .gas-compare {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .gas-compare div {
+            flex: 1;
+            min-width: 200px;
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .gas-compare .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .gas-compare .label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .gas-compare .multiplier {
+            background: var(--accent);
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .gas-compare {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Just Fucking Build on <a href="https://campnetwork.xyz" target="_blank">Camp</a></h1>
+        
+        <p class="tagline">Stop overthinking. You want IP infrastructure, EVM compatibility, and gigagas performance. Camp has all three.</p>
+
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Camp Network</th>
+            </tr>
+            <tr>
+                <td>Block Gas</td>
+                <td><strong>1 Gigagas</strong></td>
+            </tr>
+            <tr>
+                <td>Block Time</td>
+                <td><strong>1 second</strong></td>
+            </tr>
+            <tr>
+                <td>TPS</td>
+                <td><strong>50,000+</strong></td>
+            </tr>
+            <tr>
+                <td>Framework</td>
+                <td><strong>ABC Stack</strong></td>
+            </tr>
+            <tr>
+                <td>DA Layer</td>
+                <td><strong>Celestia</strong></td>
+            </tr>
+        </table>
+
+        <div class="gas-compare">
+            <div>
+                <div class="value">40M</div>
+                <div class="label">Ethereum Block Gas</div>
+            </div>
+            <div>
+                <div class="value">1B</div>
+                <div class="label">Camp Block Gas</div>
+                <div class="multiplier">25x Ethereum</div>
+            </div>
+        </div>
+
+        <h2>Full EVM Compatibility</h2>
+        <p>It's the same fucking thing you already know.</p>
+
+        <ul class="feature-list">
+            <li><strong>Same EVM bytecode.</strong> Your Solidity deploys as-is. No rewrites.</li>
+            <li><strong>Same RPC API.</strong> eth_call, eth_sendTransaction, all of it.</li>
+            <li><strong>Same wallets.</strong> MetaMask, Rainbow, any EVM wallet. Just change the RPC URL.</li>
+            <li><strong>Same tools.</strong> Foundry, Hardhat, Viem, Ethers.js. All work.</li>
+        </ul>
+
+        <h2>How the fuck does it work?</h2>
+        <p>Camp isn't magic. It's purpose-built infrastructure for IP at internet scale.</p>
+
+        <div class="tech-block">
+            <strong><a href="https://www.abundance.xyz/" target="_blank">ABC Stack</a>:</strong> Gelato's high-performance sovereign rollup architecture. Gigagas throughput without the overhead of traditional L2 bridges or settlement constraints.
+        </div>
+
+        <div class="tech-block">
+            <strong><a href="https://celestia.org/" target="_blank">Celestia DA</a>:</strong> Data availability and consensus layer. Single-slot finality through Tendermint consensus. Your data is provably available through DAS.
+        </div>
+
+        <div class="tech-block">
+            <strong>Sovereign Rollup:</strong> Camp is its own settlement layer. No external smart contracts define valid blocks. No bridge dependencies eating 20-30% of your compute.
+        </div>
+
+        <div class="tech-block">
+            <strong>Dedicated IP Blockspace:</strong> IP transactions get guaranteed resources regardless of network congestion. Reserved lanes mean your IP registrations never compete with random MEV bots.
+        </div>
+
+        <div class="tech-block">
+            <strong>EIP-1559 Gas Model:</strong> Tweaked for performance. Target block gas of 100M with 10x elasticity. Predictable fees, no surprises.
+        </div>
+
+        <h2>"But what about..."</h2>
+
+        <div class="faq-item">
+            <strong>"Is it centralized?"</strong>
+            <p>Celestia handles DA and consensus in a permissionless, decentralized manner with full nodes and light nodes performing data availability sampling. The execution layer is optimized for performance while inheriting Celestia's decentralization guarantees.</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>"Is it an L2?"</strong>
+            <p>No. Camp is a sovereign rollup - it determines its own canonical state through its own node network. There's no external smart contract on Ethereum defining valid Camp blocks. It's an L1 with Celestia for DA.</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>"Why IP-focused?"</strong>
+            <p>$80 trillion in global intangible value sits on primitive infrastructure. NFTs pointing to JPEGs. Royalties that get circumvented. No composable layer for derivatives, remixes, or AI training. Camp fixes this with purpose-built IP primitives.</p>
+        </div>
+
+        <div class="faq-item">
+            <strong>"Is it just vaporware?"</strong>
+            <p>No. Mainnet is live. Go deploy something.</p>
+        </div>
+
+        <h2>Network Details</h2>
+
+        <table class="network-table">
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Environment</td>
+                <td><code>MAINNET</code></td>
+            </tr>
+            <tr>
+                <td>Chain ID</td>
+                <td><code>484</code></td>
+            </tr>
+            <tr>
+                <td>Currency Symbol</td>
+                <td><code>CAMP</code></td>
+            </tr>
+            <tr>
+                <td>RPC URL</td>
+                <td><code>https://rpc.camp.raas.gelato.cloud</code></td>
+            </tr>
+            <tr>
+                <td>WebSocket</td>
+                <td><code>wss://ws.camp.raas.gelato.cloud</code></td>
+            </tr>
+            <tr>
+                <td>Block Explorer</td>
+                <td><code>camp.cloud.blockscout.com</code></td>
+            </tr>
+        </table>
+
+        <div class="highlight-box">
+            <p><strong>Need gas tokens?</strong> Get them from the faucet or DM <a href="https://t.me/hydrogenbond007" target="_blank">@hydrogenbond007</a> or <a href="https://t.me/rahuldoraiswami" target="_blank">@rahuldoraiswami</a> for deployment tokens.</p>
+        </div>
+
+        <h2>Start Building</h2>
+
+        <ul class="cta-list">
+            <li>
+                <a href="https://docs.campnetwork.xyz/" target="_blank">Read the docs</a>
+                <span>— Everything you need to deploy</span>
+            </li>
+            <li>
+                <a href="https://camp.cloud.blockscout.com/" target="_blank">Explore the network</a>
+                <span>— See it in action</span>
+            </li>
+            <li>
+                <a href="https://docs.campnetwork.xyz/origin-v1/origin-sdk" target="_blank">Origin SDK</a>
+                <span>— IP infrastructure primitives</span>
+            </li>
+            <li>
+                <a href="https://www.campnetwork.xyz/l1-whitepaper" target="_blank">Read the whitepaper</a>
+                <span>— Deep dive into the architecture</span>
+            </li>
+            <li>
+                <a href="https://www.abundance.xyz/" target="_blank">ABC Stack docs</a>
+                <span>— Understand the execution layer</span>
+            </li>
+        </ul>
+
+        <footer>
+            <p>This site is not official Camp Foundation documentation. It's just someone who's excited about building the IP layer of the internet.</p>
+            <p style="margin-top: 1rem;">Inspired by <a href="https://motherfuckingwebsite.com" target="_blank">motherfuckingwebsite.com</a> and <a href="https://justfuckingusemonad.com" target="_blank">justfuckingusemonad.com</a>.</p>
+        </footer>
+    </main>
+</body>
+</html>
+
